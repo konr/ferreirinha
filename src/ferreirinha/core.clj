@@ -63,3 +63,12 @@
        (filter :nota)
        (map #(assoc (:nota %) :corda (:corda %)))
        set))
+
+(defn map-vals [f map]
+  (into {} (for [[k v] map] [k (f v)])))
+
+(defn map-keys [f map]
+  (into {} (for [[k v] map] [(f k) v])))
+
+(defn migué-transpose [& xs]
+  (apply map list xs))
