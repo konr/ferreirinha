@@ -1,5 +1,6 @@
 (ns ferreirinha.soberano
-  (:require [ferreirinha.core :as f]))
+  (:require [ferreirinha.cifra :as cifra]
+            [ferreirinha.core :as f]))
 
 (def frase-1a
   [{:posição 0 :batidas 3 :corda 4}
@@ -30,4 +31,11 @@
                            (f/primeiro-que modo)
                            (select-keys [:nota :oitava])
                            (f/achar-no-braço f/braço)
-                           (->> (f/primeiro-que #(= (:corda %) (:corda padrão))))))))))
+                           (->> (f/primeiro-que #(= (:corda %) (:corda padrão)))))))
+         (map vector)))) ; FIX duetar
+
+
+(-> {:nota :lá# :oitava 2}
+    (faz-frase frase-1a modo-do-soberano)
+    cifra/cifrar
+    println)
